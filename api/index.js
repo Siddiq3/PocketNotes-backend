@@ -5,7 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allow all origins (for testing purposes)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 
 const groupsRouter = require('./routes/groups');

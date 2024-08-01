@@ -18,8 +18,15 @@ const encodedPassword = encodeURIComponent('Siddiq@03');
 const mongoDBConnectionString = process.env.DATABASE_URL.replace('Siddiq%4003', encodedPassword);
 
 mongoose.connect(mongoDBConnectionString, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to Database'))
-  .catch(err => console.log(err));
+  .then(() => {
+    console.log('Connected to Database');
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(`Server started on port ${process.env.PORT || 5000}`);
+    });
+  })
+  .catch(err => {
+    console.error('Failed to connect to Database:', err);
+    process.exit(1);
+  });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+module.exports = app;

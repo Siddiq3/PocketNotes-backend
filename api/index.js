@@ -18,6 +18,11 @@ const notesRouter = require('./routes/notes');
 app.use('/api/groups', groupsRouter);
 app.use('/api/notes', notesRouter);
 
+
+app.get('/', (req, res) => {
+  res.send('PocketNotes Backend');
+});
+
 const encodedPassword = encodeURIComponent('Siddiq@03');
 const mongoDBConnectionString = process.env.DATABASE_URL.replace('Siddiq%4003', encodedPassword);
 
